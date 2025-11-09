@@ -1,21 +1,30 @@
-import os
 import json
-from main import main  # Your orchestrator (generates/posts)
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from main import main  # Import your orchestrator (it handles logging/output)
 
-app = FastAPI()  # This 'app' is what Vercel looks for in ASGI mode
 
-@app.get("/")  # Vercel maps /api/post to this function's root; use "/" to match
-async def trigger_post():
+def handler(event, context):
+    """Vercel-compatible API handler function"""
     try:
-        main()  # Runs your Reddit posting logic
-        return JSONResponse({"status": "success", "message": "Post created! Check logs for URL."})
+        # Run the full pipeline (generates and posts)
+        main()
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": json.dumps({
+                "status": "success", 
+                "message": "SQA meme posted successfully! Check logs."
+            })
+        }
     except Exception as e:
-        return JSONResponse({"status": "error", "message": str(e)}, status_code=500)
-
-# Optional: Add POST support for manual triggers with a secret key
-@app.post("/")
-async def trigger_post_secure():
-    # Add auth if needed: if request.headers.get("Authorization") != "your-secret": return 401
-    return await trigger_post()
+        return {
+            "statusCode": 500,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": json.dumps({
+                "status": "error", 
+                "message": str(e)
+            })
+        }
