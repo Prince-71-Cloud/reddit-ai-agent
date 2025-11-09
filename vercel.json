@@ -2,8 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/**/*.py": {
-      "excludeFiles": "{tests/**,static/**,*.test.py}",
-      "runtime": "python3.12"
+      "excludeFiles": "{tests/**,static/**,*.test.py}"
     }
   },
   "routes": [
