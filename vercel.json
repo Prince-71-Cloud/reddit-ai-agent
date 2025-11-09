@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/**/*.py": {
+    "api/post.py": {
       "excludeFiles": "{tests/**,static/**,*.test.py}"
     }
   },
