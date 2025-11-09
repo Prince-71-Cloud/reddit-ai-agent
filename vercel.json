@@ -1,16 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/post.py": {
-      "excludeFiles": "{tests/**,static/**,*.test.py}"
+    "api/post/index.py": {
+      "excludeFiles": "{tests/**,static/**,*.test.py}",
+      "runtime": "python3.9"
     }
   },
-  "rewrites": [
-    {
-      "source": "/api/post",
-      "destination": "/api/post.py"
-    }
-  ],
   "crons": [
     {
       "path": "/api/post",
