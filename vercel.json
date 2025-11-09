@@ -5,10 +5,10 @@
       "excludeFiles": "{tests/**,static/**,*.test.py}"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/post",
-      "dest": "/api/post.py"
+      "source": "/api/post",
+      "destination": "/api/post.py"
     }
   ],
   "crons": [
