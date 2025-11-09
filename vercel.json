@@ -1,6 +1,8 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/post.py": {
+    "api/**/*.py": {
+      "excludeFiles": "{tests/**,static/**,*.test.py}",
       "runtime": "python3.12"
     }
   },
@@ -13,7 +15,7 @@
   "crons": [
     {
       "path": "/api/post",
-      "schedule": "0 9 * * *"
+      "schedule": "0 9 * * *"  // Daily at 9 AM UTC - generates and posts SQA memes
     }
   ]
 }
