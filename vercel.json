@@ -1,0 +1,19 @@
+{
+  "functions": {
+    "api/post.py": {
+      "runtime": "python3.12"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/post",
+      "dest": "/api/post.py"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/post",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}

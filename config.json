@@ -1,0 +1,15 @@
+{
+  "subreddit": "sqa_memes",
+  "post_style": "humorous",
+  "meme_types": [
+    "silly_situation",
+    "relatable_bug_hunt",
+    "tester_vs_dev",
+    "automated_testing",
+    "manual_testing",
+    "regression_testing",
+    "frustration_moment",
+    "victory_bug_fix",
+    "user_reported_issue"
+  ]
+}
