@@ -5,6 +5,12 @@
       "excludeFiles": "{tests/**,static/**,*.test.py}"
     }
   },
+  "routes": [
+    {
+      "src": "/api/post",
+      "dest": "/api/post.py"
+    }
+  ],
   "crons": [
     {
       "path": "/api/post",
