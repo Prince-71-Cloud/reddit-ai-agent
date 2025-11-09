@@ -14,7 +14,7 @@ class RedditPoster:
         client_secret = os.getenv("REDDIT_CLIENT_SECRET")
         username = os.getenv("REDDIT_USERNAME")
         password = os.getenv("REDDIT_PASSWORD")
-        user_agent = os.getenv("REDDIT_USER_AGENT", "RedditAI/1.0 by u/your_username")
+        user_agent = os.getenv("REDDIT_USER_AGENT", f"RedditSQA/1.0 by u/{username}")
         
         # Initialize PRAW instance
         self.reddit = praw.Reddit(
@@ -41,20 +41,33 @@ class RedditPoster:
             if subreddit is None:
                 subreddit = self.config.get("subreddit", "test")
             
+            # Check if the subreddit exists and we have permission to post
+            subreddit_obj = self.reddit.subreddit(subreddit)
+            
             # Submit the post
-            submission = self.reddit.subreddit(subreddit).submit(
+            submission = subreddit_obj.submit(
                 title=title,
                 selftext=content
             )
             
             print(f"Successfully posted: {submission.title}")
+            print(f"Posted by: {submission.author}")
             print(f"Post URL: {submission.url}")
+            print(f"Subreddit: r/{submission.subreddit.display_name}")
             
             return {
                 "success": True,
                 "url": submission.url,
                 "id": submission.id,
-                "title": submission.title
+                "title": submission.title,
+                "subreddit": submission.subreddit.display_name,
+                "author": str(submission.author)
+            }
+        except praw.exceptions.APIException as e:
+            print(f"Reddit API Error: {e}")
+            return {
+                "success": False,
+                "error": f"Reddit API Error: {str(e)}"
             }
         except Exception as e:
             print(f"Error posting to Reddit: {e}")
