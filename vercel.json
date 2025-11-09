@@ -3,7 +3,7 @@
   "functions": {
     "api/post.py": {
       "excludeFiles": "{tests/**,static/**,*.test.py}",
-      "runtime": "python3.12"
+      "runtime": "python@3.12"
     }
   },
   "crons": [
